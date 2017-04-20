@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+    <main role="main">
+        <div class="container">
+            <div class="ad-details">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-9 listing wrapper">
+                        <h2>{{producto.titulo}}</h2>
+                        <p>Publicado el:
+                            <time datetime="{{producto.publicado}}">{{producto.publicado}}</time>
+                        </p>
+                        <p class="price">{{producto.precio_producto}}
+                            {{producto.tipo_moneda}}</p>
+                        <hr>
+                        <p class="ad-description">{{producto.contenido|linebreaks}}</p>
+                        {% if producto.foto %}
+                            <div class="row center gallery">
+                                <div class="col-xs-6 col-sm-3">
+                                    <a href="{{producto.foto.url}}" rel="group" class="thumbnail">
+                                        <img src="{{producto.foto.url}}" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <br>
+                        <h6>Ver opciones de contacto arriba a la derecha</h6>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="ad-reply-options">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Opciones de contacto</div>
+                                <div class="panel-body">
+                                    <p class="lead">{{producto.nombre_contacto}}</p>
+                                    {% if producto.telefono_contacto %}
+                                        <a class="btn btn-default btn-lg btn-block" href="javascript:void();" title="Llamar a {{producto.nombre_contacto}} al {{producto.telefono_contacto}}"><abbr title="Celular"><i class="fa fa-mobile"></i></abbr> <strong>{{producto.telefono_contacto}}</strong></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

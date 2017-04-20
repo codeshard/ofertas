@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container dashboard">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Crear anuncio</div>
+                    <div class="panel-body">
+                        <div class="crud-form-container">
+                            {% load crispy_forms_tags %}
+                            {% crispy form %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block extra_js %}
+    <script src="{% static 'js/chosen.jquery.min.js' %}" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(".chosen-select").chosen();
+        $('.chosen-select-deselect').chosen({allow_single_deselect: true});
+    </script>
+{% endblock extra_js %}

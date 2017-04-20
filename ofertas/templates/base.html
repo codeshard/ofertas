@@ -1,0 +1,174 @@
+{% load static wagtailuserbar wagtailcore_tags %}
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}
+                {% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}{% endblock %}
+            | Ofertas</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" href="{% static 'css/ofertas.css' %}">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-chosen.css' %}">
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        <header>
+            <nav role="navigation">
+                <div class="container topbar hidden-xs">
+                    <h2>El camino seguro de los clasificados en Cuba</h2>
+                    <nav role="navigation" class="pull-right">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="{% slugurl 'home' %}">Inicio</a>
+                            </li>
+                            <li>
+                                <a href="#">Contacto</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="navbar navbar-inverse">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Mostrar/Ocultar menú de navegación</span>
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <a class="navbar-brand" href="{% slugurl 'home' %}" title="Ofertas"><img alt="Ofertas" src="{% static 'images/ofertas-white.svg' %}">
+                                <h1>Ofertas</h1>
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <form method="POST" action="/buscar" role="search" class="navbar-form navbar-left search">
+                                <div class="input-group input-group-lg">
+                                    <input type="text" name="q" placeholder="¿Qué estás buscando?" class="form-control q" style="width:280px!important;">
+                                    <input type="hidden" name="token" value="172c608dc9f7e0100f58a951e4beadba-43ebcc62690c1d0dd7fde0e78c1ee115">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                            <nav role="navigation" class="visible-xs">
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <a href="{% slugurl 'home' %}">Inicio</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Contacto</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="{% slugurl 'crear-anuncio' %}" class="btn ad-create">
+                                        <i class="fa fa-plus"></i>
+                                        Crear anuncio</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        {% block content %}{% endblock content %}
+        <footer>
+            <div class="container">
+                <br>
+                <div class="row">
+                    <div class="hidden-xs col-sm-4">
+                        <h3>Sobre nosotros</h3>
+                        <p>Ofertas.cu es una publicación de la Agencia de Información Nacional.</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 social-links" style="text-align: center;">
+                        <a href="https://www.facebook.com/ofertas.cu" title="Síguenos en Facebook" target="_blank" rel="external" class="facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="https://twitter.com/ofertas_cu" title="Síguenos en Twitter" target="_blank" rel="external" class="twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <!--
+				<a href="http://plus.google.com/+ofertasacn" title="Síguenos en Google+" target="_blank" rel="external" class="google-plus"><i class="fa fa-google-plus"></i></a>
+				<a href="http://www.youtube.com/c/ofertasacn" title="Síguenos en Youtube" target="_blank" rel="external" class="youtube"><i class="fa fa-youtube"></i></a>
+				-->
+                    </div>
+                    <div class="hidden-xs col-sm-4" style="text-align: right;">
+                        <div style="text-align: left; display: inline-block;">
+                            <h3>Contacto de Ofertas.cu</h3>
+                            <p>
+                                <abbr title="Teléfono">
+                                    <i class="fa fa-phone"></i>
+                                </abbr>
+                                (53) 78313366</p>
+                            <p data-ep="true" data-ep-local="ofertas" data-ep-host="ofertas.cu">
+                                <abbr title="Correo Electrónico">
+                                    <i class="fa fa-envelope"></i>
+                                </abbr>
+                            </p>
+                            <address>
+                                <abbr title="Dirección">
+                                    <i class="fa fa-home"></i>
+                                </abbr>
+                                <a href="" rel="nofollow">23 esq. a J, Vedado, La Habana.</a>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <nav>
+                    <ul class="nav&#x20;nav-pills">
+                        <li class="active">
+                            <a href="&#x2F;">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="&#x2F;page&#x2F;1&#x2F;condiciones-uso.html">Condiciones de uso</a>
+                        </li>
+                        <li>
+                            <a href="&#x2F;page&#x2F;2&#x2F;privacidad.html">Privacidad</a>
+                        </li>
+                        <li>
+                            <a href="&#x2F;contacto">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright">
+                    <abbr title="Copyright / Derechos de copia">&copy;</abbr>
+                    2015 - 2016,
+                    <a href="http://www.ain.cu/" target="_blank" rel="external">Agencia de Información Nacional</a>.
+                    <span>Todos los derechos reservados.</span>
+                </p>
+            </div>
+            <a class="to-top" href="#" title="Ir arriba">
+                <i class="fa fa-chevron-up"></i>
+                <span>Ir arriba</span>
+            </a>
+        </footer>
+
+        {# Global javascript #}
+        <script src="{% static 'js/browser.min.js' %}" charset="utf-8"></script>
+        <script src="{% static 'js/all.js' %}" charset="utf-8"></script>
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+    </body>
+</html>

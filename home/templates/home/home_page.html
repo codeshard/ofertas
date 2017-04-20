@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static anuncios_tags wagtailcore_tags %}
+{% block content %}
+    <main role="main">
+        <div class="container home">
+            <div class="row">
+                <div class="col-sm-12 col-md-9">
+                    <nav class="category-menu" role="navigation">
+                        <ul class="categories">
+                            <li>
+                                {% for cat in page.categoria_homepage.all %}
+                                    <a href="#">
+                                        <i class="fa fa-{{ cat.categoria.icono }} fa-2x"></i>
+                                        {{ cat.categoria.etiqueta }}</a>
+                                    {% get_listado_subcategorias cat.categoria as listado %}
+                                    <ul>
+                                        {% for l in listado %}
+                                            {% for sub in l %}
+                                                <li>
+                                                    <a href="{% slugurl 'listado-productos' %}?subcategoria={{sub}}">{{ sub.etiqueta }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="ads ads-h">
+                        <a href="javascript:void();" title="" target="_blank">
+                            <img src="{% static 'images/promo1.gif' %}" alt="" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="ads ads-v">
+                                <a href="javascript:void();" title="" target="_blank">
+                                    <img src="{% static 'images/promo2.gif' %}" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

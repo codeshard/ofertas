@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags anuncios_tags %}
+{% block content %}
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-lg-9 listings">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-7">
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="{% slugurl 'home' %}">Inicio</a>
+                                </li>
+                                <li>
+                                    <a href="">{{ categoria }}</a>
+                                </li>
+                                <li>
+                                    <a href="{% slugurl 'listado-productos' %}?subcategoria={{subcategoria}}">{{ subcategoria }}</a>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-5">
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Modos de lista">
+                                    <a href="" rel="nofollow" title="Ver como lista" class="btn btn-default active">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                    <a href="" rel="nofollow" title="Ver como lista detallada" class="btn btn-default">
+                                        <i class="fa fa-th-list"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5>{{ listado_productos|length }}
+                        resultados para
+                        {{ subcategoria }}</h5>
+                    {% for producto in listado_productos %}
+                        <div class="listing list-mode">
+                            <strong>${{producto.precio_producto}}
+                                {{producto.tipo_moneda}}</strong>
+                            <a href="{% slugurl 'anuncios' %}?producto={{producto.pk}}" title="{{ producto.titulo }}">{{producto.titulo}}</a>
+                            {% if producto.foto %}
+                                <abbr title="Tiene 1 foto"><i class="fa fa-picture-o"></i></abbr>
+                            {% endif %}
+                            <p>{{producto.contenido|truncatechars:100}}</p>
+                        </div>
+                    {% endfor %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if productos.has_previous %}
+                                <li>
+                                    <a href="?subcategoria={{subcategoria}}?page={{ productos.previous_page_number }}">
+                                        <i class="fa fa-angle-left"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for page_num in productos.paginator.page_range %}
+                                <li {% if page_num == resources.number %} class="active" {% endif %}>
+                                    <a href="?subcategoria={{subcategoria}}?page={{ page_num }}">{{ page_num }}</a>
+                                </li>
+                            {% endfor %}
+                            {% if productos.has_next %}
+                                <li>
+                                    <a href="?subcategoria={{subcategoria}}?page={{ productos.next_page_number }}">
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-lg-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Categorías</div>
+                        <div class="panel-body">
+                            <ul class="categories-nav">
+                                <li class="active">
+                                    <a href="&#x2F;c&#x2F;345&#x2F;computadoras&#x2F;1.html">Computadoras</a>
+                                    <ul>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;390&#x2F;pc&#x2F;1.html">PC</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;391&#x2F;laptop&#x2F;1.html">Laptop</a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="&#x2F;c&#x2F;392&#x2F;monitores&#x2F;1.html">Monitores</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;393&#x2F;tablets&#x2F;1.html">Tablets</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;394&#x2F;celulares-accesorios&#x2F;1.html">Celulares y Accesorios</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;395&#x2F;impresoras&#x2F;1.html">Impresoras</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;396&#x2F;fotocopiadoras&#x2F;1.html">Fotocopiadoras</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;397&#x2F;modem-red&#x2F;1.html">Modem y Red</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;398&#x2F;cd-dvd-bluray&#x2F;1.html">CD, DVD y Blu-ray</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;399&#x2F;audio&#x2F;1.html">Audio</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;400&#x2F;consolas-videojuegos&#x2F;1.html">Consolas y Videojuegos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;401&#x2F;accesorios-componentes&#x2F;1.html">Accesorios y Componentes</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;402&#x2F;centros-reparaciones&#x2F;1.html">Centros de reparaciones</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;403&#x2F;otros&#x2F;1.html">Otros</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="&#x2F;c&#x2F;347&#x2F;electrodomesticos&#x2F;1.html">Electrodomésticos</a>
+                                    <ul>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;406&#x2F;tv&#x2F;1.html">TV</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;407&#x2F;reproductores-video&#x2F;1.html">Reproductores de video</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;408&#x2F;lavadoras&#x2F;1.html">Lavadoras</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;409&#x2F;refrigeradores&#x2F;1.html">Refrigeradores</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;410&#x2F;planchas&#x2F;1.html">Planchas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;411&#x2F;cocinas&#x2F;1.html">Cocinas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;412&#x2F;microwaves&#x2F;1.html">Microwaves</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;413&#x2F;cafeteras-electricas&#x2F;1.html">Cafeteras eléctricas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;414&#x2F;taller-reparaciones&#x2F;1.html">Taller de Reparaciones</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;415&#x2F;otros&#x2F;1.html">Otros</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="&#x2F;c&#x2F;342&#x2F;miscelaneas&#x2F;1.html">Misceláneas</a>
+                                    <ul>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;356&#x2F;arte&#x2F;1.html">Arte</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;357&#x2F;articulos-ninos&#x2F;1.html">Artículos para niños</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;358&#x2F;articulos-deportivos&#x2F;1.html">Artículos deportivos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;359&#x2F;articulos-hogar&#x2F;1.html">Artículos para el hogar</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;360&#x2F;animales-mascotas&#x2F;1.html">Animales y Mascotas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;361&#x2F;joyas&#x2F;1.html">Joyas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;362&#x2F;instrumentos-musicales&#x2F;1.html">Instrumentos musicales</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;363&#x2F;perfumeria-cosmeticos&#x2F;1.html">Perfumería y Cosméticos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;364&#x2F;ropas-zapatos-accesorios&#x2F;1.html">Ropas, Zapatos y Accesorios</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;365&#x2F;muebles-decoracion&#x2F;1.html">Muebles y Decoración</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;366&#x2F;otros&#x2F;1.html">Otros</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="&#x2F;c&#x2F;341&#x2F;inmuebles&#x2F;1.html">Inmuebles</a>
+                                    <ul>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;348&#x2F;alquiler&#x2F;1.html">Alquiler</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;349&#x2F;arrendamiento&#x2F;1.html">Arrendamiento</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;350&#x2F;compra-venta-viviendas&#x2F;1.html">Compra y venta de viviendas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;351&#x2F;construccion-mantenimiento&#x2F;1.html">Construcción y Mantenimiento</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;352&#x2F;garajes-estacionamientos&#x2F;1.html">Garajes y Estacionamientos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;353&#x2F;terrenos-parcelas&#x2F;1.html">Terrenos y Parcelas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;354&#x2F;permutas&#x2F;1.html">Permutas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;355&#x2F;otros&#x2F;1.html">Otros</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="&#x2F;c&#x2F;346&#x2F;empleo&#x2F;1.html">Empleo</a>
+                                    <ul>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;404&#x2F;ofrezco&#x2F;1.html">Ofrezco</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;405&#x2F;necesito&#x2F;1.html">Necesito</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="&#x2F;c&#x2F;343&#x2F;transporte&#x2F;1.html">Transporte</a>
+                                    <ul>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;367&#x2F;autos&#x2F;1.html">Autos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;368&#x2F;camiones&#x2F;1.html">Camiones</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;369&#x2F;jeep&#x2F;1.html">Jeep</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;370&#x2F;motos&#x2F;1.html">Motos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;371&#x2F;embarcaciones&#x2F;1.html">Embarcaciones</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;372&#x2F;bicicletas&#x2F;1.html">Bicicletas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;373&#x2F;partes-piezas&#x2F;1.html">Partes y Piezas</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;374&#x2F;taller&#x2F;1.html">Taller</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;375&#x2F;otros&#x2F;1.html">Otros</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="&#x2F;c&#x2F;344&#x2F;servicios&#x2F;1.html">Servicios</a>
+                                    <ul>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;376&#x2F;cuidados-domicilio&#x2F;1.html">Cuidados a domicilio</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;377&#x2F;domesticos&#x2F;1.html">Domésticos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;378&#x2F;gastronomia&#x2F;1.html">Gastronomía</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;379&#x2F;jardineria&#x2F;1.html">Jardinería</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;380&#x2F;organizacion-eventos&#x2F;1.html">Organización de eventos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;381&#x2F;salud-belleza&#x2F;1.html">Salud y Belleza</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;382&#x2F;cursos&#x2F;1.html">Cursos</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;383&#x2F;traduccion-edicion&#x2F;1.html">Traducción y Edición</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;384&#x2F;repasadores&#x2F;1.html">Repasadores</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;385&#x2F;taxis&#x2F;1.html">Taxis</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;386&#x2F;viajes-turismo&#x2F;1.html">Viajes y Turismo</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;387&#x2F;mudanza&#x2F;1.html">Mudanza</a>
+                                        </li>
+                                        <li>
+                                            <a href="&#x2F;c&#x2F;388&#x2F;otros&#x2F;1.html">Otros</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}
